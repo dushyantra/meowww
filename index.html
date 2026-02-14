@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Puchkiii 💖</title>
+    <style>
+        :root { --p: #ff4d6d; --bg: #fff0f3; --dark: #c9184a; }
+        body { margin: 0; font-family: 'Verdana', sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; overflow: hidden; }
+        
+        /* Floating Hearts Background */
+        .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .heart { position: absolute; color: var(--p); opacity: 0.6; animation: float 4s linear infinite; font-size: 20px; }
+        @keyframes float { from { transform: translateY(100vh) scale(0.5); opacity: 1; } to { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+
+        .page { display: none; padding: 25px; max-width: 420px; width: 90%; background: rgba(255, 255, 255, 0.95); border-radius: 25px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); animation: zoomIn 0.5s ease; position: relative; z-index: 10; }
+        .active { display: block; }
+
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .btn { background: var(--p); color: white; border: none; padding: 12px 28px; border-radius: 50px; cursor: pointer; font-size: 1rem; margin-top: 15px; transition: 0.3s; font-weight: bold; }
+        
+        /* Letter Typing Animation */
+        .typewriter { text-align: left; font-size: 1rem; line-height: 1.6; color: #444; border-left: 3px solid var(--p); padding-left: 15px; animation: typeIn 3.5s ease-out forwards; overflow: hidden; white-space: pre-wrap; }
+        @keyframes typeIn { from { max-height: 0; opacity: 0; } to { max-height: 1000px; opacity: 1; } }
+
+        /* Memory Game Styling */
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 20px 0; }
+        .card { height: 70px; background: var(--p); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; color: transparent; transition: 0.4s; }
+        .card.flipped { background: white; border: 2px solid var(--p); color: var(--p); transform: rotateY(180deg); }
+
+        /* Photo Grid Layout */
+        .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .photo-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 15px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        input[type=range] { width: 100%; accent-color: var(--p); cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="hearts" id="heartContainer"></div>
+
+    <div id="p1" class="page active">
+        <h1>A Valentine Moment</h1>
+        <p>A Valentine Moment is being prepared for you...<br>(Catch the button 😄)</p>
+        <button class="btn" id="b1" onmouseover="move(this)" onclick="next(2)">Click Me!</button>
+    </div>
+
+    <div id="p2" class="page">
+        <h1>A Valentine Moment</h1>
+        <p>A Valentine Moment is being prepared for you...<br>(Catch the button 😄)</p>
+        <button class="btn" id="b2" onmouseover="move(this)" onclick="next(3)">Almost there! 😄</button>
+    </div>
+
+    <div id="p3" class="page">
+        <h2>A Valentine Note 💌</h2>
+        <div class="typewriter">Hey Puchkiii,
+
+Every small moment with you feels softer, warmer, and brighter. This page is a tiny reminder that you are appreciated more than words can say.
+
+Always 💕 — Puchku</div>
+        <button class="btn" onclick="next(4)">Move Forward ➡️</button>
+    </div>
+
+    <div id="p4" class="page">
+        <h2>Memory Challenge 🧩</h2>
+        <p>Match all 6 pairs to see your photos!</p>
+        <div class="grid" id="gameGrid"></div>
+        <button class="btn" id="gn" style="display:none;" onclick="next(5)">Unlock Memories 🔓</button>
+    </div>
+
+    <div id="p5" class="page">
+        <h2>Random Thoughts 📸</h2>
+        <div class="photo-grid">
+            <img src="https://i.postimg.cc/tRrRbx6b/Snapchat-1222784673.jpg">
+            <img src="https://i.postimg.cc/7hXnsNt5/Snapchat-1963261135.jpg">
+            <img src="https://i.postimg.cc/q7nXVrDx/Snapchat-963528480.jpg">
+            <img src="https://i.postimg.cc/nrVvDDF3/Snapchat-287615591.jpg">
+        </div>
+        <button class="btn" onclick="next(6)">Next ➡️</button>
+    </div>
+
+    <div id="p6" class="page">
+        <h2>One Last Valentine Thought 💝</h2>
+        <p>No big speeches — just a simple truth: you make ordinary moments feel special.</p>
+        <p>How much do you love me? 😄</p>
+        <p>Love meter: <span id="mVal">50%</span></p>
+        <input type="range" min="1" max="100" value="50" oninput="document.getElementById('mVal').innerText=this.value+'%'">
+        <br>
+        <button class="btn" style="background:#000" onclick="next(7)">Don’t click this 😈</button>
+        <p>The End 💝</p>
+    </div>
+
+    <div id="p7" class="page">
+        <h2>Wait… one more thing 🥺</h2>
+        <p>Even after all the pranks… I hope this made you smile today.</p>
+        <p>Happy Valentine’s Day 💗</p>
+        <button class="btn" onclick="next(8)">One last letter 💌</button>
+    </div>
+
+    <div id="p8" class="page">
+        <h2>A Letter From My Heart 💌</h2>
+        <div class="typewriter">Hey Puchkiii,
+
+I know I joke around and annoy you sometimes… but the truth is, I really care about you.
+
+You make simple days feel special, and even small moments with you stay in my mind for a long time. I don’t always say it perfectly, but I genuinely feel lucky that you’re here.
+
+If this little website made you smile even once, then it did its job.
+
+Always yours 💕
+— Puchku</div>
+        <button class="btn" onclick="location.reload()">Restart 💘</button>
+    </div>
+
+    <script>
+        // Heart Background Logic
+        const container = document.getElementById('heartContainer');
+        function createHeart() {
+            const h = document.createElement('div');
+            h.classList.add('heart');
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = Math.random() * 2 + 3 + 's';
+            container.appendChild(h);
+            setTimeout(() => h.remove(), 4000);
+        }
+        setInterval(createHeart, 400);
+
+        let moves = 0;
+        function move(b) {
+            if(moves < 5) {
+                b.style.position = 'fixed';
+                b.style.left = Math.random()*60 + 20 + '%';
+                b.style.top = Math.random()*60 + 20 + '%';
+                moves++;
+            } else { b.style.position = 'static'; }
+        }
+
+        function next(n) {
+            moves = 0;
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p' + n).classList.add('active');
+            if(n === 4) setupGame();
+        }
+
+        function setupGame() {
+            const icons = ['❤️', '💖', '🎁', '✨', '🍭', '🌹', '❤️', '💖', '🎁', '✨', '🍭', '🌹'];
+            icons.sort(() => Math.random() - 0.5);
+            const grid = document.getElementById('gameGrid');
+            grid.innerHTML = '';
+            let flipped = [];
+            let matched = 0;
+
+            icons.forEach(icon => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.icon = icon;
+                card.innerHTML = icon;
+                card.onclick = function() {
+                    if (flipped.length < 2 && !this.classList.contains('flipped')) {
+                        this.classList.add('flipped');
+                        flipped.push(this);
+                        if (flipped.length === 2) {
+                            if (flipped[0].dataset.icon === flipped[1].dataset.icon) {
+                                matched++;
+                                flipped = [];
+                                if (matched === 6) document.getElementById('gn').style.display = 'inline-block';
+                            } else {
+                                setTimeout(() => { flipped.forEach(c => c.classList.remove('flipped')); flipped = []; }, 600);
+                            }
+                        }
+                    }
+                };
+                grid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
